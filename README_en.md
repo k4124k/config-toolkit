@@ -1,13 +1,13 @@
 # Config Toolkit
 
-<h1>Config Toolkit V3.1.0 RELEASED</h1>
+<h1>Config Toolkit V3.1.3-jdk16-SNAPSHOT</h1>
 
 ### In a large cluster and distributed application, configuration should not be dispersed in the cluster nodes, but centrally managed.
 
 <hr>
 
 ### Depends
-* JAVA 7+
+* JAVA 6+
 * TOMCAT 7+ for ConfigWeb
 
 ### RELEASES
