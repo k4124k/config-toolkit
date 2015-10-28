@@ -26,9 +26,22 @@ public class HttpProtocol implements Protocol {
 	public byte[] read(FileLocation location) throws InvalidPathException {
 		try {
 			URL url = new URL(location.getProtocol() + ":" + location.getFile());
+			// jdk6
+			InputStream in = null;
+			try {
+				in = url.openStream();
+				return IOUtils.toByteArray(in);
+			} finally {
+				if (in != null) {
+					in.close();
+				}
+			}
+		/*
+			//jdk7
 			try (InputStream in = url.openStream()) {
 				return IOUtils.toByteArray(in);
 			}
+			*/
 		} catch (MalformedURLException e) {
 			throw new InvalidPathException(e);
 		} catch (IOException e) {

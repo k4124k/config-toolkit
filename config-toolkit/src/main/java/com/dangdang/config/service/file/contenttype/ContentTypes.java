@@ -1,5 +1,6 @@
 package com.dangdang.config.service.file.contenttype;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Enumeration;
@@ -37,9 +38,21 @@ public final class ContentTypes {
 			URL registerFile = null;
 			while (registerFiles.hasMoreElements()) {
 				registerFile = registerFiles.nextElement();
+				//jdk6
+				InputStream in = null;
+				try {
+					in = registerFile.openStream();
+					props.load(in);
+				} finally {
+					if (in != null){
+						in.close();
+					}
+				}
+				/*
+				// jdk7
 				try (InputStream in = registerFile.openStream()) {
 					props.load(in);
-				}
+				}*/
 			}
 
 			// Initialize protocol beans

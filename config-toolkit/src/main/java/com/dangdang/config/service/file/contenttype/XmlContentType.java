@@ -8,6 +8,7 @@ import java.util.Properties;
 
 import com.dangdang.config.service.exception.InvalidPathException;
 import com.google.common.collect.Maps;
+import org.apache.commons.io.IOUtils;
 
 /**
  * <p>
@@ -27,11 +28,27 @@ public class XmlContentType implements ContentType {
 	@Override
 	public Map<String, String> resolve(byte[] data, String encoding) throws InvalidPathException {
 		Properties props = new Properties();
-		try (InputStream in = new ByteArrayInputStream(data)) {
+		// jdk6
+		InputStream in = null;
+		try {
+			in = new ByteArrayInputStream(data);
+			props.loadFromXML(in);
+		} catch (IOException e){
+			throw new InvalidPathException(e);
+		} finally{
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		/*try (InputStream in = new ByteArrayInputStream(data)) {
 			props.loadFromXML(in);
 		} catch (IOException e) {
 			throw new InvalidPathException(e);
-		}
+		}*/
 
 		return Maps.fromProperties(props);
 	}
