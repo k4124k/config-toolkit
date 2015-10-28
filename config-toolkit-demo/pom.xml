@@ -1,24 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>config-toolkit-demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>3.1.3-jdk16-SNAPSHOT</version>
 	<parent>
 		<groupId>com.dangdang</groupId>
-		<artifactId>config-toolkit-parent</artifactId>
-		<relativePath>../config-toolkit-parent</relativePath>
-		<version>3.0.0-RELEASE</version>
+		<artifactId>config-toolkit-package</artifactId>
+		<relativePath>../pom.xml</relativePath>
+		<version>3.1.3-jdk16-SNAPSHOT</version>
 	</parent>
 
-	<properties>
-		<config-toolkit-easyzk.version>3.1.1-RELEASE</config-toolkit-easyzk.version>
-		<zookeeper.version>3.4.6</zookeeper.version>
-	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.dangdang</groupId>
 			<artifactId>config-toolkit</artifactId>
-			<version>${config-toolkit-easyzk.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.zookeeper</groupId>
