@@ -1,6 +1,6 @@
 # 分布配置工具包
 
-<h1>Config Toolkit V3.1.3-jdk16-SNAPSHOT</h1>
+<h1>Config Toolkit V3.1.3-SNAPSHOT</h1>
 
 ### 在大型集群和分布式应用中，配置不宜分散到节点中，应该集中管理.
 
@@ -18,7 +18,7 @@
 * QQ群: 457997852
 
 ### 依赖
-* JAVA 6+
+* JAVA 7+
 * TOMCAT 7+ for ConfigWeb
 
 ### RELEASES

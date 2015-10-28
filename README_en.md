@@ -1,6 +1,6 @@
 # Config Toolkit
 
-<h1>Config Toolkit V3.1.3-jdk16-SNAPSHOT</h1>
+<h1>Config Toolkit V3.1.3-SNAPSHOT</h1>
 
 ### In a large cluster and distributed application, configuration should not be dispersed in the cluster nodes, but centrally managed.
 

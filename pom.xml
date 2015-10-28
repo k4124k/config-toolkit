@@ -24,6 +24,7 @@
 	</licenses>
 
 	<properties>
+        <compile.level>1.7</compile.level>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.io.platform.version>1.1.2.RELEASE</spring.io.platform.version>
 		<apache.commons-collections.version>4.0</apache.commons-collections.version>
@@ -39,8 +40,6 @@
 		<logback_version>1.0.6</logback_version>
 		<jcl_over_slf4j_version>1.7.7</jcl_over_slf4j_version>
         <zookeeper.version>3.4.5</zookeeper.version>
-
-
         <jsf-myfaces.version>2.1.12</jsf-myfaces.version>
         <primefaces.version>5.1</primefaces.version>
         <jstl.version>1.2</jstl.version>
@@ -129,9 +128,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<encoding>UTF-8</encoding>
+					<source>${compile.level}</source>
+					<target>${compile.level}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
