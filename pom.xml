@@ -39,7 +39,7 @@
 		<log4j_version>1.2.16</log4j_version>
 		<logback_version>1.0.6</logback_version>
 		<jcl_over_slf4j_version>1.7.7</jcl_over_slf4j_version>
-        <zookeeper.version>3.4.5</zookeeper.version>
+        <zookeeper.version>3.4.6</zookeeper.version>
         <jsf-myfaces.version>2.1.12</jsf-myfaces.version>
         <primefaces.version>5.1</primefaces.version>
         <jstl.version>1.2</jstl.version>
