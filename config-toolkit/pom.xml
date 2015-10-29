@@ -79,18 +79,4 @@
         </dependency>
 	</dependencies>
 
-	<properties>
-		<nexus.url>http://nexus.g2work.com</nexus.url>
-	</properties>
-	<distributionManagement>
-		<snapshotRepository>
-			<id>cloud-snapshots</id>
-			<url>${nexus.url}/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>cloud-releases</id>
-			<url>${nexus.url}/nexus/content/repositories/releases</url>
-		</repository>
-	</distributionManagement>
-
 </project>
