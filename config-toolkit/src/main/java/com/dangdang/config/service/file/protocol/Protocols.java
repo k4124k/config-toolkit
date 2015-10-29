@@ -57,9 +57,12 @@ public final class Protocols {
 			protocols = Maps.newHashMap();
 			for (Map.Entry<Object, Object> entry : props.entrySet()) {
 				final String protocolName = ((String) entry.getKey()).toLowerCase();
-				@SuppressWarnings("unchecked")
-				final Class<Protocol> protocolBeanClazz = (Class<Protocol>) Class.forName((String) entry.getValue());
-				protocols.put(protocolName, protocolBeanClazz);
+				//为兼容jdk6屏蔽classpath和file
+				if (!protocolName.startsWith("#")) {
+					@SuppressWarnings("unchecked")
+                    final Class<Protocol> protocolBeanClazz = (Class<Protocol>) Class.forName((String) entry.getValue());
+					protocols.put(protocolName, protocolBeanClazz);
+				}
 			}
 		} catch (Exception e) {
 			throw Throwables.propagate(e);

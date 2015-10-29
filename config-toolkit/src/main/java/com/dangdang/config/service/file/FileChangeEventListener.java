@@ -1,78 +1,68 @@
 package com.dangdang.config.service.file;
 
-import java.nio.file.Path;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchEvent;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
-
+import com.dangdang.config.service.file.protocol.LocalFileProtocol;
+import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
+import org.apache.commons.io.monitor.FileAlterationObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+
 /**
- * Watcher for file changes
+ * Watcher for file changes use FileAlterationListenerAdaptor
  * 
  * @author <a href="mailto:wangyuxuan@dangdang.com">Yuxuan Wang</a>
  *
  */
-public class FileChangeEventListener implements Runnable {
+public class FileChangeEventListener extends FileAlterationListenerAdaptor {
 
-	private WatchService watcher;
+    private static final Logger LOGGER = LoggerFactory.getLogger(LocalFileProtocol.class);
 
-	private FileConfigGroup configGroup;
+	private FileConfigGroup fileConfigGroup;
 
-	private Path watchedFile;
-
-	public FileChangeEventListener(WatchService watcher, FileConfigGroup configGroup, Path watchedFile) {
-		super();
-		this.watcher = watcher;
-		this.configGroup = configGroup;
-		this.watchedFile = watchedFile;
+	public FileChangeEventListener( FileConfigGroup fileConfigGroup){
+		this.fileConfigGroup = fileConfigGroup;
 	}
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(FileChangeEventListener.class);
 
 	@Override
-	public void run() {
-		while (true) {
-			// wait for key to be signaled
-			WatchKey key;
-			try {
-				key = watcher.take();
-			} catch (InterruptedException x) {
-				return;
-			}
-
-			for (WatchEvent<?> event : key.pollEvents()) {
-				WatchEvent.Kind<?> kind = event.kind();
-
-				// This key is registered only for ENTRY_MODIFY events,
-				if (kind != StandardWatchEventKinds.ENTRY_MODIFY) {
-					continue;
-				}
-
-				// The filename is the context of the event.
-				@SuppressWarnings("unchecked")
-				WatchEvent<Path> ev = (WatchEvent<Path>) event;
-				Path filename = ev.context();
-
-				LOGGER.debug("File {} changed.", filename);
-
-				if (isSameFile(filename, watchedFile)) {
-					configGroup.initConfigs();
-				}
-
-			}
-			
-			boolean status = key.reset();
-			if(!status) {
-				break;
-			}
-		}
+	public void onStart(FileAlterationObserver observer) {
+        super.onStart(observer);
 	}
 
-	private boolean isSameFile(Path file1, Path file2) {
-		return file1.getFileName().equals(file2.getFileName());
+	@Override
+	public void onDirectoryCreate(File directory) {
+
 	}
+
+	@Override
+	public void onDirectoryChange(File directory) {
+
+	}
+
+	@Override
+	public void onDirectoryDelete(File directory) {
+
+	}
+
+	@Override
+	public void onFileCreate(File file) {
+
+	}
+
+	@Override
+	public void onFileChange(File file) {
+        LOGGER.debug("File {} changed.", file.getName());
+		fileConfigGroup.initConfigs();
+	}
+
+	@Override
+	public void onFileDelete(File file) {
+
+	}
+
+	@Override
+	public void onStop(FileAlterationObserver observer) {
+        super.onStop(observer);
+    }
 
 }
